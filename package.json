@@ -4,9 +4,9 @@
   "description": "LatLomp Client form portal - client project management platform",
   "main": "index.js",
   "scripts": {
-  "start": "node server.js",
-  "dev": "nodemon server.js"
-},
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,7 +19,9 @@
     "express-session": "^1.19.0",
     "helmet": "^8.3.0",
     "mongoose": "^9.10.1",
-    "morgan": "^1.12.1"
+    "morgan": "^1.12.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
