@@ -8,6 +8,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const statusRoutes = require('./routes/statusRoutes');
 const authRoutes = require('./routes/authRoutes');
+const masterAdminAuthRoutes = require('./routes/masterAdminAuthRoutes');
+const pageRoutes = require('./routes/pageRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const session = require('express-session');
@@ -52,6 +54,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', statusRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/master-admin/auth', masterAdminAuthRoutes);
+app.use(pageRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Admin Login — LatLomp</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <span class="logo">LatLomp</span>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="card auth-card">
+      <h1>Master Admin Login</h1>
+      <p class="subtitle">Authorized access only.</p>
+
+      <div id="loginAlert"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-input" type="text" id="username" name="username" autocomplete="username" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-group">
+            <input class="form-input" type="password" id="password" name="password" autocomplete="current-password" required>
+            <button type="button" class="input-toggle" id="togglePassword">Show</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+          <span id="loginBtnText">Log In</span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/masterAdminLogin.js"></script>
+</body>
+</html>

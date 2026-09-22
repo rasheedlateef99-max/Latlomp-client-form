@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — LatLomp Client Form</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo" style="text-decoration:none;">LatLomp</a>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="card auth-card" style="max-width: 460px;">
+      <h1>Log In</h1>
+      <p class="subtitle">How are you accessing LatLomp Client Form?</p>
+
+      <div id="loginAlert"></div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+
+        <div class="card" style="padding: var(--space-md); box-shadow: none;">
+          <h3 style="margin-bottom: var(--space-xs);">Business / Agency</h3>
+          <p class="form-help" style="margin-bottom: var(--space-md);">
+            Create and manage project forms for your own clients.
+          </p>
+          <a href="/api/auth/google" class="btn btn-primary btn-block">
+            Continue with Google
+          </a>
+        </div>
+
+        <div class="card" style="padding: var(--space-md); box-shadow: none;">
+          <h3 style="margin-bottom: var(--space-xs);">Platform Owner</h3>
+          <p class="form-help" style="margin-bottom: var(--space-md);">
+            LatLomp administrator access.
+          </p>
+          <a href="/master-admin/login" class="btn btn-secondary btn-block">
+            Master Admin Login
+          </a>
+        </div>
+
+        <div class="card" style="padding: var(--space-md); box-shadow: none;">
+          <h3 style="margin-bottom: var(--space-xs);">Client</h3>
+          <p class="form-help">
+            If you were sent a project form link, please use that link directly — it will guide you through sign-in.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -3,19 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LatLomp Client Portal</title>
+  <title>LatLomp Client Form</title>
+  <meta name="description" content="Submit your project details to LatLomp quickly and professionally.">
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-  <div class="container" style="padding-top: var(--space-xl);">
-    <h1>LatLomp Client Portal</h1>
-    <p style="color: var(--color-text-muted); margin-top: var(--space-sm);">
-      Professional software, business systems, and digital platforms — built for you.
-    </p>
-    <a href="/start-project" class="btn btn-primary" style="margin-top: var(--space-lg); display:inline-block;">
-      Start Your Project
-    </a>
-  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <span class="logo">LatLomp</span>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="/">Home</a>
+          <a href="/start-project">Start a Project</a>
+          <span id="authNavSlot"></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>LatLomp Client Form</h1>
+        <p>Tell us about your project — quickly, clearly, and securely. We'll review your details and get back to you.</p>
+        <a href="/start-project" class="btn btn-primary">Start Your Project</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; <span id="year"></span> LatLomp. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/authState.js"></script>
 </body>
 </html>
