@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     slot.innerHTML = `
       <span style="color: var(--color-text-muted); font-size: 0.9rem;">Hi, ${user.name}</span>
       ${middleLink}
+      <a href="/my-submissions">My Submissions</a>
       <a href="#" id="logoutLink">Log Out</a>
     `;
     document.getElementById('logoutLink').addEventListener('click', async (e) => {

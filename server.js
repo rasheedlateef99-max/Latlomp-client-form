@@ -15,6 +15,7 @@ const formRoutes = require('./routes/formRoutes');
 const publicFormRoutes = require('./routes/publicFormRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const mySubmissionsRoutes = require('./routes/mySubmissionsRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -68,6 +69,7 @@ app.use('/api/forms', formRoutes);
 app.use('/api/public-forms', publicFormRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/my-submissions', mySubmissionsRoutes);
 app.use(pageRoutes);
 
 app.use(notFound);

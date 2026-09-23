@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Submissions — LatLomp Client Form</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo" style="text-decoration:none;">LatLomp</a>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/start-project">Start a Project</a>
+          <span id="authNavSlot"></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <h1>My Submissions</h1>
+    <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Project requests you've submitted.</p>
+    <div id="list"><p>Loading...</p></div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/authState.js"></script>
+  <script src="/js/mySubmissions.js"></script>
+</body>
+</html>

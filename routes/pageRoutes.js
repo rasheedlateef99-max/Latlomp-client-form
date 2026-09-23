@@ -58,4 +58,12 @@ router.get('/master-admin/businesses', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'master-admin', 'businesses.html'));
 });
 
+router.get('/my-submissions', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'my-submissions.html'));
+});
+
+router.get('/my-submissions/:projectId', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'my-submissions-detail.html'));
+});
+
 module.exports = router;
