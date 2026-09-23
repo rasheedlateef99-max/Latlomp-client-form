@@ -2,6 +2,7 @@ const Tenant = require('../models/Tenant');
 const Form = require('../models/Form');
 const Question = require('../models/Question');
 const Project = require('../models/Project');
+const Notification = require('../models/Notification');
 
 async function getPublicForm(req, res) {
   const { tenantSlug, formSlug } = req.params;
@@ -80,6 +81,15 @@ async function submitForm(req, res) {
     status: 'new',
     answers: cleanAnswers,
     submittedAt: new Date()
+  });
+
+  await Notification.create({
+    tenantId: tenant._id,
+    userId: tenant.ownerUserId,
+    type: 'new_submission',
+    title: 'New Client Submission',
+    message: `New submission for "${form.name}" (${project.requestId})`,
+    relatedProjectId: project._id
   });
 
   res.status(201).json({ requestId: project.requestId });

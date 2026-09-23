@@ -12,6 +12,8 @@ const masterAdminAuthRoutes = require('./routes/masterAdminAuthRoutes');
 const tenantRoutes = require('./routes/tenantRoutes');
 const formRoutes = require('./routes/formRoutes');
 const publicFormRoutes = require('./routes/publicFormRoutes');
+const projectRoutes = require('./routes/projectRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -31,6 +33,7 @@ require('./models/Form');
 require('./models/Question');
 require('./models/Project');
 require('./models/ClientProfile');
+require('./models/Notification');
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
@@ -61,6 +64,8 @@ app.use('/api/master-admin/auth', masterAdminAuthRoutes);
 app.use('/api/tenants', tenantRoutes);
 app.use('/api/forms', formRoutes);
 app.use('/api/public-forms', publicFormRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use(pageRoutes);
 
 app.use(notFound);

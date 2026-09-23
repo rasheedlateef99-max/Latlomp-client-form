@@ -261,6 +261,32 @@ a.card:hover {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+.badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-error);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.tag-new {
+  display: inline-block;
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-left: var(--space-sm);
+}
+
 .empty-state {
   text-align: center;
   color: var(--color-text-muted);

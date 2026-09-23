@@ -46,4 +46,12 @@ router.get('/f/:tenantSlug/:formSlug', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'f.html'));
 });
 
+router.get('/tenant/submissions', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'tenant', 'submissions.html'));
+});
+
+router.get('/tenant/submissions/:projectId', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'tenant', 'submission-detail.html'));
+});
+
 module.exports = router;
