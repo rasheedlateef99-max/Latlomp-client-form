@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Form — LatLomp Client Form</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/tenant/dashboard" class="logo" style="text-decoration:none;">LatLomp</a>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="/tenant/dashboard">Dashboard</a>
+          <a href="/tenant/forms">Manage Forms</a>
+          <a href="#" id="logoutLink">Log Out</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <p style="margin-bottom: var(--space-sm);"><a href="/tenant/forms">&larr; Your Forms</a></p>
+    <h1 id="formTitle">Loading...</h1>
+    <p id="formLink" class="form-help" style="margin-bottom: var(--space-lg);"></p>
+
+    <div id="questionsList" style="margin-bottom: var(--space-lg);"></div>
+
+    <div class="card">
+      <h3 style="margin-bottom: var(--space-md);">Add a Question</h3>
+      <div class="form-group">
+        <label class="form-label" for="qLabel">Question</label>
+        <input class="form-input" type="text" id="qLabel" placeholder="e.g. What is your budget?">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="qType">Type</label>
+        <select class="form-select" id="qType">
+          <option value="short_text">Short Text</option>
+          <option value="long_text">Long Text</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="number">Number</option>
+          <option value="yes_no">Yes / No</option>
+          <option value="single_choice">Single Choice</option>
+          <option value="multiple_choice">Multiple Choice</option>
+          <option value="dropdown">Dropdown</option>
+          <option value="file_upload">File Upload</option>
+        </select>
+      </div>
+      <div class="form-group" id="optionsGroup" style="display:none;">
+        <label class="form-label" for="qOptions">Options (one per line)</label>
+        <textarea class="form-textarea" id="qOptions" rows="3"></textarea>
+      </div>
+      <div class="form-group" style="display:flex; align-items:center; gap: var(--space-sm);">
+        <input type="checkbox" id="qRequired">
+        <label for="qRequired">Required</label>
+      </div>
+      <button class="btn btn-primary" id="addQuestionBtn">Add Question</button>
+      <div id="questionAlert"></div>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/tenantNav.js"></script>
+  <script src="/js/formEdit.js"></script>
+</body>
+</html>

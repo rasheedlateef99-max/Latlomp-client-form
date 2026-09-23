@@ -5,6 +5,12 @@ const { googleCallback, getCurrentUser, logout } = require('../controllers/authC
 
 router.get(
   '/google',
+  (req, res, next) => {
+    if (req.query.returnTo) {
+      req.session.returnTo = req.query.returnTo;
+    }
+    next();
+  },
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 

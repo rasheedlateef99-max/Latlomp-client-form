@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Forms — LatLomp Client Form</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/tenant/dashboard" class="logo" style="text-decoration:none;">LatLomp</a>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="/tenant/dashboard">Dashboard</a>
+          <a href="/tenant/forms">Manage Forms</a>
+          <a href="#" id="logoutLink">Log Out</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <h1>Your Forms</h1>
+    <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Create a project intake form to send to your clients.</p>
+
+    <div id="createBox" class="card" style="margin-bottom: var(--space-lg);">
+      <div class="form-group">
+        <label class="form-label" for="formName">New Form Name</label>
+        <input class="form-input" type="text" id="formName" placeholder="e.g. Website Development Project">
+      </div>
+      <button class="btn btn-primary" id="createFormBtn">Create Form</button>
+      <div id="createAlert"></div>
+    </div>
+
+    <div id="formsList"></div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/tenantNav.js"></script>
+  <script src="/js/tenantForms.js"></script>
+</body>
+</html>

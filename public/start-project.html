@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LatLomp Client Form</title>
-  <meta name="description" content="Submit your project details to LatLomp quickly and professionally.">
+  <title>Start Your Project — LatLomp Client Form</title>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-
   <header class="site-header">
     <div class="container">
-      <span class="logo">LatLomp</span>
+      <a href="/" class="logo" style="text-decoration:none;">LatLomp</a>
       <nav>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -28,20 +26,19 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>LatLomp Client Form</h1>
-        <p>Tell us about your project — quickly, clearly, and securely. We'll review your details and get back to you.</p>
-        <a href="/start-project" class="btn btn-primary">Start Your Project</a>
-      </div>
-    </section>
+  <main class="container" style="padding-top: var(--space-xl); max-width: 600px;">
+    <h1>Start Your Project</h1>
+    <p style="color: var(--color-text-muted); margin-top: var(--space-md);">
+      If a business or agency sent you a project link, please use that link directly — it will take you straight to their form.
+    </p>
+    <p style="color: var(--color-text-muted); margin-top: var(--space-md);">
+      Are you a business or agency wanting to create your own client project form?
+      <a href="/login">Get started here</a>.
+    </p>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      &copy; <span id="year"></span> LatLomp. All rights reserved.
-    </div>
+    <div class="container">&copy; <span id="year"></span> LatLomp. All rights reserved.</div>
   </footer>
 
   <script src="/js/main.js"></script>

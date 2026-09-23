@@ -1,8 +1,7 @@
 function googleCallback(req, res) {
-  // Successful login — redirect to homepage for now.
-  // A real "where does this user go" decision (tenant dashboard,
-  // client portal, onboarding) belongs to a later phase.
-  res.redirect('/');
+  const returnTo = req.session.returnTo;
+  delete req.session.returnTo;
+  res.redirect(returnTo || '/');
 }
 
 function getCurrentUser(req, res) {
