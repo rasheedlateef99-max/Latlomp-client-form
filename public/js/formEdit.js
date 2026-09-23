@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const formId = window.location.pathname.split('/').pop();
 
   const formTitle = document.getElementById('formTitle');
-  const formLink = document.getElementById('formLink');
   const questionsList = document.getElementById('questionsList');
   const qType = document.getElementById('qType');
   const optionsGroup = document.getElementById('optionsGroup');
@@ -22,8 +21,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const data = await res.json();
     formTitle.textContent = data.form.name;
-    formLink.textContent = `Public link (available once Priority F is built): /start-project/${data.form.slug}`;
+
+    const publicUrl = `${window.location.origin}/f/${data.tenantSlug}/${data.form.slug}`;
+    const linkCard = document.getElementById('publicLinkCard');
+    const linkInput = document.getElementById('publicLinkInput');
+    const openBtn = document.getElementById('openLinkBtn');
+    linkInput.value = publicUrl;
+    openBtn.href = publicUrl;
+    linkCard.style.display = 'block';
   }
+
+  document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+    const linkInput = document.getElementById('publicLinkInput');
+    const btn = document.getElementById('copyLinkBtn');
+    try {
+      await navigator.clipboard.writeText(linkInput.value);
+    } catch (err) {
+      linkInput.select();
+      document.execCommand('copy');
+    }
+    const original = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = original; }, 1500);
+  });
 
   async function loadQuestions() {
     const res = await fetch(`/api/forms/${formId}/questions`, { credentials: 'same-origin' });

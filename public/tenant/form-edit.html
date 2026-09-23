@@ -16,7 +16,7 @@
           <span></span><span></span><span></span>
         </button>
         <div class="nav-links" id="navLinks">
-          <a href="/tenant/dashboard">Dashboard</a>
+          <a href="/tenant/dashboard">My Business</a>
           <a href="/tenant/forms">Manage Forms</a>
           <a href="#" id="logoutLink">Log Out</a>
         </div>
@@ -27,7 +27,16 @@
   <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
     <p style="margin-bottom: var(--space-sm);"><a href="/tenant/forms">&larr; Your Forms</a></p>
     <h1 id="formTitle">Loading...</h1>
-    <p id="formLink" class="form-help" style="margin-bottom: var(--space-lg);"></p>
+
+    <div class="card" id="publicLinkCard" style="margin: var(--space-lg) 0; display:none;">
+      <h3 style="margin-bottom: var(--space-sm);">Public Link</h3>
+      <p class="form-help" style="margin-bottom: var(--space-sm);">Share this link with your client. They'll sign in with Google before filling it out.</p>
+      <div style="display:flex; gap: var(--space-sm); flex-wrap: wrap;">
+        <input class="form-input" type="text" id="publicLinkInput" readonly style="flex:1; min-width:200px;">
+        <button class="btn btn-secondary" id="copyLinkBtn">Copy Link</button>
+        <a class="btn btn-secondary" id="openLinkBtn" href="#" target="_blank" rel="noopener">Open</a>
+      </div>
+    </div>
 
     <div id="questionsList" style="margin-bottom: var(--space-lg);"></div>
 

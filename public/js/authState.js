@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let middleLink;
     if (tenantRes.ok) {
-      middleLink = `<a href="/tenant/dashboard">Dashboard</a>`;
+      middleLink = `<a href="/tenant/dashboard">My Business</a>`;
     } else {
       middleLink = `<a href="/tenant/create">Set Up Your Business</a>`;
     }

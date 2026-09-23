@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const data = await tenantRes.json();
 
   content.innerHTML = `
-    <h1>Welcome, ${data.tenant.name}</h1>
-    <p style="color: var(--color-text-muted); margin: var(--space-sm) 0 var(--space-lg);">Here's your workspace.</p>
-    <a href="/tenant/forms" class="card" style="max-width:320px;">
-      <h3>Manage Forms</h3>
-      <p class="form-help">Create and edit your client project forms.</p>
-    </a>
+    <h1>${data.tenant.name}</h1>
+    <p style="color: var(--color-text-muted); margin: var(--space-sm) 0 var(--space-lg);">Your business workspace.</p>
+    <div class="card" style="max-width: 420px;">
+      <h3 style="margin-bottom: var(--space-xs);">Forms</h3>
+      <p class="form-help" style="margin-bottom: var(--space-md);">Create and manage the project forms you send to your clients.</p>
+      <a href="/tenant/forms" class="btn btn-primary">Manage Forms</a>
+    </div>
   `;
 });

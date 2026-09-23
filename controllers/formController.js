@@ -40,7 +40,7 @@ async function createForm(req, res) {
 async function getForm(req, res) {
   const form = await Form.findOne({ _id: req.params.formId, tenantId: req.tenant._id });
   if (!form) return res.status(404).json({ error: 'Form not found' });
-  res.json({ form });
+  res.json({ form, tenantSlug: req.tenant.slug });
 }
 
 module.exports = { listForms, createForm, getForm };
