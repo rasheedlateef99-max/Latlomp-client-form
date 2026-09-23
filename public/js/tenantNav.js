@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const logoutLink = document.getElementById('logoutLink');
-  if (logoutLink) {
-    logoutLink.addEventListener('click', async (e) => {
-      e.preventDefault();
-      await fetch('/api/auth/logout', { credentials: 'same-origin' });
-      window.location.href = '/';
-    });
-  }
+  renderNav([
+    { href: '/tenant/dashboard', label: 'My Business' },
+    { href: '/tenant/forms', label: 'Manage Forms' },
+    { href: '/tenant/submissions', label: 'Submissions', id: 'submissionsLink' },
+    { id: 'logoutLink', label: 'Log Out' }
+  ], {
+    logoutUrl: '/api/auth/logout',
+    afterLogout: '/'
+  });
 
   const badge = document.getElementById('unreadBadge');
   if (badge) {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       }
     } catch (err) {
-      // Badge is a convenience — fail silently
+      // convenience only — fail silently
     }
   }
 });

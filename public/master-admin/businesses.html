@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — LatLomp Client Form</title>
+  <title>Businesses — LatLomp Admin</title>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
-
   <header class="site-header">
     <div class="container">
-      <a href="/tenant/dashboard" class="logo" style="text-decoration:none;">LatLomp</a>
+      <a href="/master-admin/dashboard" class="logo" style="text-decoration:none;">LatLomp Admin</a>
       <nav>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -21,13 +20,16 @@
     </div>
   </header>
 
-  <main class="container" style="padding-top: var(--space-xl);">
-    <div id="dashboardContent"><p>Loading...</p></div>
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <p style="margin-bottom: var(--space-sm);"><a href="/master-admin/dashboard">&larr; Dashboard</a></p>
+    <h1>Businesses</h1>
+    <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">All registered businesses on the platform.</p>
+    <div id="businessesList"><p>Loading...</p></div>
   </main>
 
   <script src="/js/main.js"></script>
   <script src="/js/siteNav.js"></script>
-  <script src="/js/tenantNav.js"></script>
-  <script src="/js/tenantDashboard.js"></script>
+  <script src="/js/masterAdminNavConfig.js"></script>
+  <script src="/js/masterAdminBusinesses.js"></script>
 </body>
 </html>

@@ -54,4 +54,8 @@ router.get('/tenant/submissions/:projectId', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'tenant', 'submission-detail.html'));
 });
 
+router.get('/master-admin/businesses', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'master-admin', 'businesses.html'));
+});
+
 module.exports = router;
