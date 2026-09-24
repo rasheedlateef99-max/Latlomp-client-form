@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <a href="/my-submissions/${s.id}" class="card" style="display:block; margin-bottom: var(--space-md);">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm);">
         <div>
-          <strong>${s.requestId}</strong>
+          <strong>${s.requestId}</strong>${s.isNew ? '<span class="tag-new">New</span>' : ''}
           <div class="form-help">${s.formName} · ${s.businessName}</div>
         </div>
         <span style="color:var(--color-text-muted); font-size:0.85rem;">${s.status.replace('_', ' ')}</span>

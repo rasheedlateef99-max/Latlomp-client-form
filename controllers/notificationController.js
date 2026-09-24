@@ -9,4 +9,9 @@ async function listNotifications(req, res) {
   res.json({ unreadCount });
 }
 
-module.exports = { listNotifications };
+async function getClientNotificationCount(req, res) {
+  const unreadCount = await Notification.countDocuments({ userId: req.user._id, read: false });
+  res.json({ unreadCount });
+}
+
+module.exports = { listNotifications, getClientNotificationCount };

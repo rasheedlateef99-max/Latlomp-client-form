@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </p>
           <p class="form-help">Reference ID</p>
           <p style="font-weight:700; font-size:1.2rem; margin-top:var(--space-xs);">${result.requestId}</p>
+          <a href="/client/dashboard" class="btn btn-primary" style="margin-top:var(--space-lg);">Go to My Dashboard</a>
         </div>
       `;
     } catch (err) {

@@ -16,6 +16,7 @@ const publicFormRoutes = require('./routes/publicFormRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const mySubmissionsRoutes = require('./routes/mySubmissionsRoutes');
+const myNotificationsRoutes = require('./routes/myNotificationsRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -36,6 +37,7 @@ require('./models/Question');
 require('./models/Project');
 require('./models/ClientProfile');
 require('./models/Notification');
+require('./models/Message');
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
@@ -70,6 +72,7 @@ app.use('/api/public-forms', publicFormRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/my-submissions', mySubmissionsRoutes);
+app.use('/api/my-notifications', myNotificationsRoutes);
 app.use(pageRoutes);
 
 app.use(notFound);

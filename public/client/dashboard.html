@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Submission Details — LatLomp Client Form</title>
+  <title>My Dashboard — LatLomp Client Form</title>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
 </head>
@@ -21,25 +21,12 @@
   </header>
 
   <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
-    <p style="margin-bottom: var(--space-sm);"><a href="/my-submissions">&larr; My Submissions</a></p>
-    <div id="content"><p>Loading...</p></div>
-
-    <div id="messageThreadSection" style="display:none; margin-top:var(--space-lg);">
-      <h3 style="margin-bottom: var(--space-md);">Messages</h3>
-      <div id="messagesList" style="margin-bottom: var(--space-md);"></div>
-      <form id="messageForm">
-        <div class="form-group">
-          <textarea class="form-textarea" id="messageBody" rows="3" placeholder="Write a message..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" id="sendMessageBtn">Send</button>
-        <div id="messageAlert"></div>
-      </form>
-    </div>
+    <div id="dashboardContent"><p>Loading...</p></div>
   </main>
 
   <script src="/js/main.js"></script>
   <script src="/js/siteNav.js"></script>
   <script src="/js/clientNavConfig.js"></script>
-  <script src="/js/mySubmissionDetail.js"></script>
+  <script src="/js/clientDashboard.js"></script>
 </body>
 </html>

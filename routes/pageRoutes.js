@@ -66,4 +66,8 @@ router.get('/my-submissions/:projectId', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'my-submissions-detail.html'));
 });
 
+router.get('/client/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'client', 'dashboard.html'));
+});
+
 module.exports = router;

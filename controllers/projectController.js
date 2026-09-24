@@ -2,6 +2,7 @@ const Project = require('../models/Project');
 const Question = require('../models/Question');
 const Form = require('../models/Form');
 const Notification = require('../models/Notification');
+const User = require('../models/User');
 
 async function listProjects(req, res) {
   const projects = await Project.find({ tenantId: req.tenant._id }).sort({ createdAt: -1 });
@@ -50,6 +51,8 @@ async function getProject(req, res) {
     { read: true }
   );
 
+  const client = await User.findById(project.clientUserId);
+
   res.json({
     project: {
       id: project._id,
@@ -57,6 +60,7 @@ async function getProject(req, res) {
       status: project.status,
       submittedAt: project.submittedAt
     },
+    client: client ? { name: client.name, email: client.email } : null,
     answers
   });
 }

@@ -22,7 +22,19 @@
 
   <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
     <p style="margin-bottom: var(--space-sm);"><a href="/tenant/submissions">&larr; Submissions</a></p>
-    <div id="submissionContent"><p>Loading...</p></div>
+        <div id="submissionContent"><p>Loading...</p></div>
+
+    <div id="messageThreadSection" style="display:none; margin-top:var(--space-lg);">
+      <h3 style="margin-bottom: var(--space-md);">Messages</h3>
+      <div id="messagesList" style="margin-bottom: var(--space-md);"></div>
+      <form id="messageForm">
+        <div class="form-group">
+          <textarea class="form-textarea" id="messageBody" rows="3" placeholder="Message your client..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="sendMessageBtn">Send</button>
+        <div id="messageAlert"></div>
+      </form>
+    </div>
   </main>
 
   <script src="/js/main.js"></script>

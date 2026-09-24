@@ -2,6 +2,7 @@ const Project = require('../models/Project');
 const Form = require('../models/Form');
 const Tenant = require('../models/Tenant');
 const Question = require('../models/Question');
+const Notification = require('../models/Notification');
 
 async function listMySubmissions(req, res) {
   const projects = await Project.find({ clientUserId: req.user._id }).sort({ createdAt: -1 });
@@ -16,6 +17,13 @@ async function listMySubmissions(req, res) {
   const tenantMap = {};
   tenants.forEach(t => { tenantMap[t._id.toString()] = t; });
 
+  const unreadNotifs = await Notification.find({
+    userId: req.user._id,
+    read: false,
+    relatedProjectId: { $ne: null }
+  });
+  const unreadProjectIds = new Set(unreadNotifs.map(n => n.relatedProjectId.toString()));
+
   res.json({
     submissions: projects.map(p => ({
       id: p._id,
@@ -23,7 +31,8 @@ async function listMySubmissions(req, res) {
       status: p.status,
       submittedAt: p.submittedAt,
       formName: formMap[p.formId.toString()]?.name || 'Unknown form',
-      businessName: tenantMap[p.tenantId.toString()]?.name || 'Unknown business'
+      businessName: tenantMap[p.tenantId.toString()]?.name || 'Unknown business',
+      isNew: unreadProjectIds.has(p._id.toString())
     }))
   });
 }

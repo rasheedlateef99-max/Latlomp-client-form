@@ -1,7 +1,21 @@
-function googleCallback(req, res) {
+const TenantMembership = require('../models/TenantMembership');
+const Project = require('../models/Project');
+
+async function googleCallback(req, res) {
   const returnTo = req.session.returnTo;
   delete req.session.returnTo;
-  res.redirect(returnTo || '/');
+
+  if (returnTo) return res.redirect(returnTo);
+
+  const membership = await TenantMembership.findOne({
+    userId: req.user._id, role: 'owner', status: 'active'
+  });
+  if (membership) return res.redirect('/tenant/dashboard');
+
+  const hasSubmissions = await Project.exists({ clientUserId: req.user._id });
+  if (hasSubmissions) return res.redirect('/client/dashboard');
+
+  return res.redirect('/');
 }
 
 function getCurrentUser(req, res) {
