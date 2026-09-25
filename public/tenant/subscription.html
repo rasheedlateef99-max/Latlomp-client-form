@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription — LatLomp Client Form</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/tenant/dashboard" class="logo" style="text-decoration:none;">LatLomp</a>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <h1>Subscription</h1>
+    <div id="statusCard" style="margin: var(--space-lg) 0;"><p>Loading...</p></div>
+
+    <h3 style="margin-bottom: var(--space-md);">Available Packages</h3>
+    <div id="packagesList"><p>Loading...</p></div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/siteNav.js"></script>
+  <script src="/js/tenantNav.js"></script>
+  <script src="/js/tenantSubscription.js"></script>
+</body>
+</html>

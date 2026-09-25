@@ -11,6 +11,8 @@ const authRoutes = require('./routes/authRoutes');
 const masterAdminAuthRoutes = require('./routes/masterAdminAuthRoutes');
 const masterAdminRoutes = require('./routes/masterAdminRoutes');
 const masterAdminPackagesRoutes = require('./routes/masterAdminPackagesRoutes');
+const subscriptionRoutes = require('./routes/subscriptionRoutes');
+const paystackWebhookRoutes = require('./routes/paystackWebhookRoutes');
 const tenantRoutes = require('./routes/tenantRoutes');
 const formRoutes = require('./routes/formRoutes');
 const publicFormRoutes = require('./routes/publicFormRoutes');
@@ -46,6 +48,12 @@ require('./models/AuditLog');
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(morgan('dev'));
+
+// Mounted BEFORE express.json(): Paystack signs the raw request body, so
+// this route must consume it as raw bytes via its own express.raw()
+// before the global JSON parser would otherwise transform it.
+app.use('/api/webhooks/paystack', paystackWebhookRoutes);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -71,6 +79,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/master-admin/auth', masterAdminAuthRoutes);
 app.use('/api/master-admin', masterAdminRoutes);
 app.use('/api/master-admin/packages', masterAdminPackagesRoutes);
+app.use('/api/subscription', subscriptionRoutes);
 app.use('/api/tenants', tenantRoutes);
 app.use('/api/forms', formRoutes);
 app.use('/api/public-forms', publicFormRoutes);

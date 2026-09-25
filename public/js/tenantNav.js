@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     { href: '/tenant/dashboard', label: 'My Business' },
     { href: '/tenant/forms', label: 'Manage Forms' },
     { href: '/tenant/submissions', label: 'Submissions', id: 'submissionsLink' },
+        { href: '/tenant/subscription', label: 'Subscription' },
     { id: 'logoutLink', label: 'Log Out' }
   ], {
     logoutUrl: '/api/auth/logout',
