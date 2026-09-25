@@ -1,4 +1,7 @@
 const Tenant = require('../models/Tenant');
+const User = require('../models/User');
+const Form = require('../models/Form');
+const Project = require('../models/Project');
 
 async function getDashboardStats(req, res) {
   const totalTenants = await Tenant.countDocuments();
@@ -33,4 +36,25 @@ async function updateTenantStatus(req, res) {
   res.json({ tenant: { id: tenant._id, accountStatus: tenant.accountStatus } });
 }
 
-module.exports = { getDashboardStats, listTenants, updateTenantStatus };
+async function getTenantDetail(req, res) {
+  const tenant = await Tenant.findById(req.params.tenantId);
+  if (!tenant) return res.status(404).json({ error: 'Business not found' });
+
+  const owner = await User.findById(tenant.ownerUserId);
+  const formCount = await Form.countDocuments({ tenantId: tenant._id });
+  const projectCount = await Project.countDocuments({ tenantId: tenant._id });
+
+  res.json({
+    tenant: {
+      id: tenant._id,
+      name: tenant.name,
+      slug: tenant.slug,
+      accountStatus: tenant.accountStatus,
+      createdAt: tenant.createdAt
+    },
+    owner: owner ? { name: owner.name, email: owner.email } : null,
+    stats: { formCount, projectCount }
+  });
+}
+
+module.exports = { getDashboardStats, listTenants, updateTenantStatus, getTenantDetail };

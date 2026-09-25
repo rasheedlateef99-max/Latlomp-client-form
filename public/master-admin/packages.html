@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packages — LatLomp Admin</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/master-admin/dashboard" class="logo" style="text-decoration:none;">LatLomp Admin</a>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-xl); max-width: 700px;">
+    <p style="margin-bottom: var(--space-sm);"><a href="/master-admin/dashboard">&larr; Dashboard</a></p>
+    <h1>Subscription Packages</h1>
+    <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Manage the packages businesses can purchase.</p>
+
+    <div class="card" style="margin-bottom: var(--space-lg);">
+      <h3 style="margin-bottom: var(--space-md);">Create Package</h3>
+      <div class="form-group">
+        <label class="form-label" for="pkgName">Name</label>
+        <input class="form-input" type="text" id="pkgName" placeholder="e.g. 30-Day Plan">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pkgDescription">Description</label>
+        <input class="form-input" type="text" id="pkgDescription">
+      </div>
+      <div style="display:flex; gap: var(--space-md);">
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="pkgPrice">Price</label>
+          <input class="form-input" type="number" id="pkgPrice" min="0">
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="pkgCurrency">Currency</label>
+          <input class="form-input" type="text" id="pkgCurrency" value="NGN">
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="pkgDuration">Duration (days)</label>
+          <input class="form-input" type="number" id="pkgDuration" min="1">
+        </div>
+      </div>
+      <div class="form-group" style="display:flex; align-items:center; gap: var(--space-sm);">
+        <input type="checkbox" id="pkgPromo">
+        <label for="pkgPromo">Promotional</label>
+      </div>
+      <button class="btn btn-primary" id="createPkgBtn">Create Package</button>
+      <div id="createAlert"></div>
+    </div>
+
+    <div id="packagesList"><p>Loading...</p></div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/siteNav.js"></script>
+  <script src="/js/masterAdminNavConfig.js"></script>
+  <script src="/js/masterAdminPackages.js"></script>
+</body>
+</html>

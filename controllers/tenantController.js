@@ -33,10 +33,15 @@ async function createTenant(req, res) {
     counter++;
   }
 
+  const now = new Date();
+  const trialEndsAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+
   const tenant = await Tenant.create({
     name: name.trim(),
     slug,
-    ownerUserId: req.user._id
+    ownerUserId: req.user._id,
+    trialStartsAt: now,
+    trialEndsAt
   });
 
   await TenantMembership.create({

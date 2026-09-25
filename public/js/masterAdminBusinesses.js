@@ -5,40 +5,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statusData = await statusRes.json();
   if (!statusData.isMasterAdmin) { window.location.href = '/master-admin/login'; return; }
 
-  await loadTenants();
+  const res = await fetch('/api/master-admin/tenants', { credentials: 'same-origin' });
+  const data = await res.json();
 
-  async function loadTenants() {
-    const res = await fetch('/api/master-admin/tenants', { credentials: 'same-origin' });
-    const data = await res.json();
+  if (!data.tenants.length) {
+    list.innerHTML = '<div class="empty-state">No businesses registered yet.</div>';
+    return;
+  }
 
-    if (!data.tenants.length) {
-      list.innerHTML = '<div class="empty-state">No businesses registered yet.</div>';
-      return;
-    }
-
-    list.innerHTML = data.tenants.map(t => `
-      <div class="card" style="margin-bottom: var(--space-sm); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm);">
+  list.innerHTML = data.tenants.map(t => `
+    <a href="/master-admin/businesses/${t.id}" class="card" style="display:block; margin-bottom: var(--space-sm);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm);">
         <div>
           <strong>${t.name}</strong>
-          <div class="form-help">/${t.slug} · ${t.accountStatus}</div>
+          <div class="form-help">/${t.slug}</div>
         </div>
-        ${t.accountStatus === 'active'
-          ? `<button class="btn btn-secondary" data-id="${t.id}" data-status="suspended">Suspend</button>`
-          : `<button class="btn btn-secondary" data-id="${t.id}" data-status="active">Activate</button>`}
+        <span class="tag-new" style="background:var(--color-info-bg); color:var(--color-info);">${t.accountStatus}</span>
       </div>
-    `).join('');
-
-    list.querySelectorAll('button[data-status]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        btn.disabled = true;
-        await fetch(`/api/master-admin/tenants/${btn.dataset.id}/status`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ status: btn.dataset.status })
-        });
-        loadTenants();
-      });
-    });
-  }
+    </a>
+  `).join('');
 });

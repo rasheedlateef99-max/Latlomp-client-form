@@ -70,4 +70,12 @@ router.get('/client/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'client', 'dashboard.html'));
 });
 
+router.get('/master-admin/businesses/:tenantId', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'master-admin', 'business-detail.html'));
+});
+
+router.get('/master-admin/packages', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'master-admin', 'packages.html'));
+});
+
 module.exports = router;

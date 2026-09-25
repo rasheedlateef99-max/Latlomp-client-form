@@ -40,9 +40,12 @@ const tenantSchema = new mongoose.Schema(
     },
     accountStatus: {
       type: String,
-      enum: ['active', 'suspended', 'archived'],
+      enum: ['pending', 'active', 'suspended', 'archived'],
       default: 'active'
-    }
+    },
+    trialStartsAt: { type: Date },
+    trialEndsAt: { type: Date },
+    currentPeriodEnd: { type: Date }
   },
   { timestamps: true }
 );
