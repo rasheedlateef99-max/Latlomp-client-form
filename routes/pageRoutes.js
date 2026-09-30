@@ -82,4 +82,8 @@ router.get('/tenant/subscription', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'tenant', 'subscription.html'));
 });
 
+router.get('/master-admin/payments', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'master-admin', 'payments.html'));
+});
+
 module.exports = router;

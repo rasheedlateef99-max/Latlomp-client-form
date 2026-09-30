@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./config/env').assertEnv();
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
@@ -13,6 +14,7 @@ const masterAdminRoutes = require('./routes/masterAdminRoutes');
 const masterAdminPackagesRoutes = require('./routes/masterAdminPackagesRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const paystackWebhookRoutes = require('./routes/paystackWebhookRoutes');
+const masterAdminPaymentsRoutes = require('./routes/masterAdminPaymentsRoutes');
 const tenantRoutes = require('./routes/tenantRoutes');
 const formRoutes = require('./routes/formRoutes');
 const publicFormRoutes = require('./routes/publicFormRoutes');
@@ -28,6 +30,11 @@ const { MongoStore } = require('connect-mongo');
 const passport = require('./config/passport');
 
 const app = express();
+
+// Render/Railway/most VPS reverse proxies terminate HTTPS in front of Node.
+// Without this, Express thinks every request is plain HTTP, which breaks
+// secure cookies below.
+app.set('trust proxy', 1);
 
 connectDB();
 
@@ -46,7 +53,7 @@ require('./models/Payment');
 require('./models/AuditLog');
 
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL || false }));
 app.use(morgan('dev'));
 
 // Mounted BEFORE express.json(): Paystack signs the raw request body, so
@@ -64,7 +71,9 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     }
   })
 );
@@ -80,6 +89,7 @@ app.use('/api/master-admin/auth', masterAdminAuthRoutes);
 app.use('/api/master-admin', masterAdminRoutes);
 app.use('/api/master-admin/packages', masterAdminPackagesRoutes);
 app.use('/api/subscription', subscriptionRoutes);
+app.use('/api/master-admin/payments', masterAdminPaymentsRoutes);
 app.use('/api/tenants', tenantRoutes);
 app.use('/api/forms', formRoutes);
 app.use('/api/public-forms', publicFormRoutes);

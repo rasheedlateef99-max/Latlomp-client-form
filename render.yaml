@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: latlomp-client-form
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/status
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_CALLBACK_URL
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: MASTER_ADMIN_USERNAME
+        sync: false
+      - key: MASTER_ADMIN_PASSWORD_HASH
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
