@@ -7,24 +7,47 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (reference) {
     statusCard.innerHTML = '<p>Verifying your payment...</p>';
-    const verifyRes = await fetch(`/api/subscription/verify/${reference}`, { credentials: 'same-origin' });
-    if (verifyRes.ok) {
-      const verifyData = await verifyRes.json();
-      showPaymentOutcome(verifyData.payment.status);
+    try {
+      const verifyRes = await fetch(`/api/subscription/verify/${reference}`, { credentials: 'same-origin' });
+      if (verifyRes.ok) {
+        const verifyData = await verifyRes.json();
+        showPaymentOutcome(verifyData.payment.status);
+      }
+    } catch (err) {
+      console.error('Payment verification failed:', err);
     }
     window.history.replaceState({}, '', '/tenant/subscription');
   }
 
-  const statusRes = await fetch('/api/subscription/status', { credentials: 'same-origin' });
-  if (statusRes.status === 401) { window.location.href = '/login'; return; }
-  if (statusRes.status === 403) { window.location.href = '/tenant/create'; return; }
+  try {
+    const statusRes = await fetch('/api/subscription/status', { credentials: 'same-origin' });
+    if (statusRes.status === 401) { window.location.href = '/login'; return; }
+    if (statusRes.status === 403) { window.location.href = '/tenant/create'; return; }
+    if (!statusRes.ok) {
+      statusCard.innerHTML = '<div class="alert alert-error">Could not load your subscription status. Please refresh.</div>';
+    } else {
+      const { access } = await statusRes.json();
+      renderStatus(access);
+    }
+  } catch (err) {
+    console.error('Subscription status fetch failed:', err);
+    statusCard.innerHTML = '<div class="alert alert-error">Could not load your subscription status. Please refresh.</div>';
+  }
 
-  const { access } = await statusRes.json();
-  renderStatus(access);
-
-  const pkgRes = await fetch('/api/subscription/packages', { credentials: 'same-origin' });
-  const pkgData = await pkgRes.json();
-  renderPackages(pkgData.packages);
+  try {
+    const pkgRes = await fetch('/api/subscription/packages', { credentials: 'same-origin' });
+    if (!pkgRes.ok) {
+      const errBody = await pkgRes.text();
+      console.error('Packages fetch failed:', pkgRes.status, errBody);
+      packagesList.innerHTML = `<div class="alert alert-error">Could not load available packages (error ${pkgRes.status}). Please refresh or contact support.</div>`;
+      return;
+    }
+    const pkgData = await pkgRes.json();
+    renderPackages(pkgData.packages || []);
+  } catch (err) {
+    console.error('Packages fetch threw:', err);
+    packagesList.innerHTML = '<div class="alert alert-error">Could not load available packages. Please refresh.</div>';
+  }
 
   function showPaymentOutcome(status) {
     const messages = {
@@ -65,9 +88,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     packagesList.innerHTML = packages.map(p => `
       <div class="card" style="margin-bottom: var(--space-sm); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm);">
         <div>
-          <strong>${p.name}</strong>${p.isPromotional ? '<span class="tag-new">Promo</span>' : ''}
-          <div class="form-help">${p.description || ''}</div>
-          <div class="form-help">${p.currency} ${p.price} · ${p.durationDays} days</div>
+          <strong>${escapeHtml(p.name)}</strong>${p.isPromotional ? '<span class="tag-new">Promo</span>' : ''}
+          <div class="form-help">${escapeHtml(p.description || '')}</div>
+          <div class="form-help">${escapeHtml(p.currency)} ${p.price} · ${p.durationDays} days</div>
         </div>
         <button class="btn btn-primary" data-package-id="${p._id}">Purchase</button>
       </div>
@@ -77,20 +100,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       btn.addEventListener('click', async () => {
         btn.disabled = true;
         btn.textContent = 'Redirecting...';
-        const res = await fetch('/api/subscription/checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ packageId: btn.dataset.packageId })
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          alert(data.error || 'Could not start checkout.');
+        try {
+          const res = await fetch('/api/subscription/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ packageId: btn.dataset.packageId })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            alert(data.error || 'Could not start checkout.');
+            btn.disabled = false;
+            btn.textContent = 'Purchase';
+            return;
+          }
+          window.location.href = data.authorizationUrl;
+        } catch (err) {
+          alert('Could not reach the server. Please try again.');
           btn.disabled = false;
           btn.textContent = 'Purchase';
-          return;
         }
-        window.location.href = data.authorizationUrl;
       });
     });
   }
