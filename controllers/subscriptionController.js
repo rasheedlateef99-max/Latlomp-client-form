@@ -12,7 +12,16 @@ function toSubunit(amount, currency) {
 }
 
 async function getStatus(req, res) {
-  const access = getAccessStatus(req.tenant);
+  let tenant = req.tenant;
+
+  if (!tenant.trialStartsAt && !tenant.currentPeriodEnd) {
+    const now = new Date();
+    tenant.trialStartsAt = now;
+    tenant.trialEndsAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    await tenant.save();
+  }
+
+  const access = getAccessStatus(tenant);
   res.json({ access });
 }
 
