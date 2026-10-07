@@ -5,6 +5,7 @@ const { getStatus, listActivePackages, initiateCheckout, verifyReturn } = requir
 
 router.use(requireTenantOwner);
 router.get('/status', getStatus);
+router.get('/packages', listActivePackages);
 router.post('/checkout', initiateCheckout);
 router.get('/verify/:reference', verifyReturn);
 

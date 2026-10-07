@@ -1,5 +1,10 @@
+const path = require('path');
+
 function notFound(req, res, next) {
-  res.status(404).json({ error: 'Route not found' });
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Route not found' });
+  }
+  res.status(404).sendFile(path.join(__dirname, '..', 'public', '404.html'));
 }
 
 function errorHandler(err, req, res, next) {
